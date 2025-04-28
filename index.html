@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" >
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/images/logo/ballon.jpg" />
+    <title>Paris sportif</title>
+</head>
+    <body>
+        <header class="navbar">
+            <nav class="navbar-nav">
+                <p>Paris Sportif Matic</p>
+                <ul class="lien_matic">
+                    <li> <a href="#">Liste longue</a> </li>
+                    <li> <a href="#">Cote</a> </li>
+                    <li> <a href="#">Live match</a> </li>
+                    <li> <a href="#">Loto</a> </li>
+                    <li> <a href="#">Pronostics</a> </li>
+                </ul>
+            </nav>
+            <div
+            class="loading"
+            
+        >
+        <div 
+            class="element_loading">
+            <div 
+            class="img_main"
+            >
+                <img 
+                src="images/logo/ballon.jpg"
+                alt="paris sportif"
+                >
+            </div>
+            <h3 class="mt-10">Paris Sportif by Matic</h3>
+            
+            <div class="progress mt-8">
+                <div class="progress-val"></div>
+            </div>
+        </div>
+        </div>
+        </header>
+           
+            <div class="banner_paris">
+                <img 
+                src="images/logo/ballon main.jpg" 
+                alt="ballon main.jpg"/>
+            </div>
+            <section class="Liste_match">
+                <h2>Liste Longue</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            
+                        <th>Match</th>
+                        <th>equipe 1</th>
+                        <th>equipe 2</th>
+                        <th>Null</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                            
+                            <label for="match3">
+                               match1
+                            </label>
+                            
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="2.56" id="equipe1">
+                            2.56
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="2.90" id="equipe1">
+                            2.90
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="3.50" id="equipe1">
+                            
+                            3.50
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                            
+                            <label for="match2">
+                               match2
+                            </label>
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="1.90" id="equipe1">
+                            1.90
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="2.10" id="equipe1">
+                            2.10
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="1.80" id="equipe1">
+                            1.80
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                            
+                            <label for="match1">
+                                match3
+                            </label>
+                           
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="2.0" id="equipe1">
+                            2.0
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="1.90" id="equipe1">
+                            1.90
+                        </td>
+                        <td>
+                            <input type="radio" name="equipe1" value="1.50" id="equipe1">
+                            1.50
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                </table>
+                <form onsubmit="Palation(event)">
+                    <h4>Mise </h4>
+                    <div class="form-group mt-8">
+                        <input type="number" id="Mise" min="300" value="300" class="form-control">
+                    </div>
+                    <div class="form-group mt-10">
+                        <label for="" id="Montant"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Pariez" id="Pariez">
+                    </div>
+                </form>
+
+                <aside class="notification">
+                   <div class="notification_aside">
+                        <img 
+                        src="images/logo/ballon main.jpg" 
+                        alt="ballon main.jpg"/>
+                        <p class="notification_text"></p>
+                   </div>
+                </aside>
+<!-- .apparNotification -->
+                <script>
+                    const cote = document.querySelectorAll('input[name=equipe1]');
+                    // console.log(cote);
+                    const notification=document.querySelector('.notification')
+                    const notification_text=document.querySelector('.notification_text')
+                    const mont = document.getElementById('Montant');
+                    const pariez = document.getElementById('Pariez');
+                    const mise = document.getElementById('Mise');
+                    const progress = document.querySelector('.progress-val');
+                    const loading  = document.querySelector('.loading');
+                    const cotes={setValue:0,
+                        getValue(){
+                           return this.setValue
+                        }
+                    }
+                    cote.forEach((cotess)=>{
+                        cotess.addEventListener('click',(e)=>{
+                            console.log(e.target.value);
+                            cotes.setValue=e.target.value
+                            mont.innerText="Montant : " + (mise.value * ( (cotes.getValue()!=0) ? cotes.getValue() : 1 ));
+                        });
+                    });
+                    
+                    mise.addEventListener('change',()=>{
+                        mont.innerText="Montant : " + (mise.value * ( (cotes.getValue()!=0) ? cotes.getValue() : 1 ));
+                    });
+                    mont.innerText="Montant : "+mise.value;
+
+                    function Palation(e)
+                    {
+                        e.preventDefault();
+                        console.log(e)
+                        pariez.style.desabled=true;
+                        pariez.value="chargement...";
+                        console.log("chargement...");
+                        setTimeout(() => {
+                            pariez.style.desabled=false;
+                            pariez.value="Pariez"  ;
+                            notification_text.innerText= " le ticket de " + mont.innerText + " a été bien misé ";
+                            notification.classList.add('apparNotification');
+                            console.log("Pariez");
+                            setTimeout(() => {
+                                notification.classList.remove('apparNotification');
+                            }, 2000);
+                        }, 3000);
+                    }
+
+                    window.addEventListener('load',()=> {
+                        
+                        for (let index = 0; index < 100; index++) {       
+                            progress.style.width=index +"%";
+                            setTimeout(() => {
+                                if(index==99){
+                                
+                                loading.classList.add('disparu')
+                                    }
+                            }, 900);
+                           
+                        }
+                    });
+                </script>
+            </section>
+    </body>
+</html>
